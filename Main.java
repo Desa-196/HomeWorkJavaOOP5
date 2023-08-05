@@ -5,7 +5,6 @@ public class Main {
         CalculatorView view = new CalculatorView();
         CalculatorPresenter presenter = new CalculatorPresenter(model, view);
 
-        // Обработка действия пользователя (например, нажатие кнопки "Сложить")
-        presenter.onAddButtonClicked();
+        presenter.calculate();
     }
 }

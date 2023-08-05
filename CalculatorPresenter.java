@@ -7,13 +7,29 @@ public class CalculatorPresenter {
         this.view = view;
     }
 
-    public void onAddButtonClicked() {
-        float number1 = view.readDoubleFromConsole();
-        float number2 = view.readDoubleFromConsole();
+    public void calculate() {
 
-        model.add(number1, number2);
-        float result = model.getResult();
+        //В данном случае Presenter пинает View запросить у пользователя ввести два числа
+        float number1 = view.readFloatFromConsole();
+        float number2 = view.readFloatFromConsole();
+        
+        //Затем Presenter просит View спросить у пользователя: "А что с ними делать то?", и в зависимости от ответа говорит модели какую логику нужно провернуть с числами
+        switch (view.getOperation()) {
+            case "*":
+                model.multiply(number1, number2);
+                break;
+            case "/":
+                model.divide(number1, number2);
+                break;
+            case "+":
+                model.add(number1, number2);
+                break;
+            case "-":
+                model.subtract(number1, number2);
+                break;
 
-        view.displayResult(result);
+        }
+        //Ну и просит View отобразить содержимое результата в модели
+        view.displayResult(model.getResult());
     }
 }
